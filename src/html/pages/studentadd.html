@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  @@include('../layouts/head-page-meta.html', {'title': 'Student Add'})
+  @@include('../layouts/head-css.html')
+</head>
+<body @@bodySetup>
+  @@include('../layouts/layout-vertical.html')
+  <div class="pc-container">
+    <div class="pc-content">
+      @@include('../layouts/breadcrumb.html', {'breadcrumb-item': 'Students', 'breadcrumb-item-active': 'Student Add'})
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">Basic Information</h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">First Name</label>
+                    <input type="text" class="form-control" placeholder="Enter first name">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Last Name</label>
+                    <input type="text" class="form-control" placeholder="Enter last name">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" placeholder="Enter email">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Mobile Number</label>
+                    <input type="number" class="form-control" placeholder="Enter Mobile number">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3 row">
+                        <label class="form-label">Main teacher</label>
+                          <input
+                            class="form-control"
+                            id="choices-teacher-remove-button"
+                            type="text"
+                            value="O.Dulguun, Densmaa"
+                            placeholder="Choose class teacher">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3 row">
+                        <label class="form-label">Class</label>
+                          <input
+                            class="form-control"
+                            id="choices-class-remove-button"
+                            type="text"
+                            value="Year-1, Year-2, Prep-A, Prep-B"
+                            placeholder="Enter something">
+                    </div>
+                </div>
+                <div class="col-md-12 text-end">
+                  <button class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/js/plugins/choices.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var textRemove = new Choices(document.getElementById('choices-class-remove-button'), {
+        delimiter: ',',
+        editItems: true,
+        maxItemCount: 3,
+        removeItemButton: true
+      });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+      var textRemove = new Choices(document.getElementById('choices-teacher-remove-button'), {
+        delimiter: ',',
+        editItems: true,
+        maxItemCount: 3,
+        removeItemButton: true
+      });
+    });
+  </script>
+  @@include('../layouts/footer-block.html') @@include('../layouts/footer-js.html')
+   
+</body>
+</html>

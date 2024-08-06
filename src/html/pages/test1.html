@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  @@include('../layouts/head-page-meta.html', {'title': 'User List'})
+  <link rel="stylesheet" href="../assets/css/plugins/style.css">
+  @@include('../layouts/head-css.html')
+</head>
+<body>
+  @@include('../layouts/layout-vertical.html')
+
+  <div class="pc-container">
+    <div class="pc-content">
+      @@include('../layouts/breadcrumb.html', {'breadcrumb-item': 'Teachers', 'breadcrumb-item-active': 'Teachers List'})
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card border-0 table-card user-profile-list">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover" id="pc-dt-simple">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Position</th>
+                      <th>Class</th>
+                      <th>Phone</th>
+                      <th>Start date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="d-inline-block align-middle">
+                          <img src="../assets/images/user/avatar-1.jpg" alt="user image" class="img-radius align-top m-r-15" style="width:40px;">
+                          <div class="d-inline-block">
+                            <h6 class="m-b-0">Quinn Flynn</h6>
+                            <p class="m-b-0 text-primary">Android developer</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Support Lead</td>
+                      <td>Year-1, Year2</td>
+                      <td>61</td>
+                      <td>2011/04/25</td>
+                      <td>
+                        <span class="badge bg-light-success">Active</span>
+                        <div class="overlay-edit">
+                          <ul class="list-inline mb-0">
+                            <li class="list-inline-item m-0"><a href="javascript:void(0)" class="avtar avtar-s btn btn-primary edit-btn" data-id="1"><i class="ti ti-pencil f-18"></i></a></li>
+                            <li class="list-inline-item m-0"><a href="javascript:void(0)" class="avtar avtar-s btn bg-white btn-link-danger delete-btn" data-id="1"><i class="ti ti-trash f-18"></i></a></li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                    <!-- Repeat similar structure for other rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Form Modal -->
+  <div id="editModal" style="display:none;">
+    <form id="editForm" method="POST" action="edit-teacher.php">
+      <input type="hidden" name="id" id="editId">
+      <label for="editName">Name:</label>
+      <input type="text" name="name" id="editName" required>
+      <label for="editPosition">Position:</label>
+      <input type="text" name="position" id="editPosition" required>
+      <label for="editClass">Class:</label>
+      <input type="text" name="class" id="editClass" required>
+      <label for="editPhone">Phone:</label>
+      <input type="text" name="phone" id="editPhone" required>
+      <label for="editStartDate">Start date:</label>
+      <input type="date" name="start_date" id="editStartDate" required>
+      <label for="editStatus">Status:</label>
+      <select name="status" id="editStatus">
+        <option value="Active">Active</option>
+        <option value="Disabled">Disabled</option>
+      </select>
+      <button type="submit">Update</button>
+    </form>
+  </div>
+
+  @@include('../layouts/footer-block.html')
+  @@include('../layouts/footer-js.html')
+  <script src="../assets/js/plugins/simple-datatables.js"></script>
+  <script>
+    const dataTable = new simpleDatatables.DataTable('#pc-dt-simple', {
+      sortable: false,
+      perPage: 5
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const editButtons = document.querySelectorAll('.edit-btn');
+      const editModal = document.getElementById('editModal');
+      const editForm = document.getElementById('editForm');
+
+      editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const row = this.closest('tr');
+          const id = this.getAttribute('data-id');
+          const name = row.querySelector('td:nth-child(1) .d-inline-block h6').innerText;
+          const position = row.querySelector('td:nth-child(2)').innerText;
+          const classValue = row.querySelector('td:nth-child(3)').innerText;
+          const phone = row.querySelector('td:nth-child(4)').innerText;
+          const startDate = row.querySelector('td:nth-child(5)').innerText;
+          const status = row.querySelector('td:nth-child(6) .badge').innerText;
+
+          document.getElementById('editId').value = id;
+          document.getElementById('editName').value = name;
+          document.getElementById('editPosition').value = position;
+          document.getElementById('editClass').value = classValue;
+          document.getElementById('editPhone').value = phone;
+          document.getElementById('editStartDate').value = startDate;
+          document.getElementById('editStatus').value = status;
+
+          editModal.style.display = 'block';
+        });
+      });
+    });
+  </script>
+   
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- [Head] start -->
+
+<head>
+  @@include('../layouts/head-page-meta.html', {'title': 'Sample Page'}) @@include('../layouts/head-css.html')
+</head>
+<body @@bodySetup>
+  @@include('../layouts/layout-vertical.html')
+  <div class="pc-container">
+    <div class="pc-content">
+      @@include('../layouts/breadcrumb.html', {'breadcrumb-item': 'Other', 'breadcrumb-item-active': 'Sample Page'})
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <h5>Hello card</h5>
+            </div>
+            <div class="card-body">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @@include('../layouts/footer-block.html') @@include('../layouts/footer-js.html')
+   
+</body>
+</html>
