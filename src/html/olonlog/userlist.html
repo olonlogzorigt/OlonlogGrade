@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  @@include('../layouts/head-page-meta.html', {'title': 'User List'})
+  <link rel="stylesheet" href="../assets/css/plugins/style.css" >
+  @@include('../layouts/head-css.html')
+</head>
+<body>
+  @@include('../layouts/layout-vertical.html')
+
+  <div class="pc-container">
+    <div class="pc-content">
+      @@include('../layouts/breadcrumb.html', {'breadcrumb-item': 'Teachers', 'breadcrumb-item-active': 'Teachers List'})
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card border-0 table-card user-profile-list">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover " id="pc-dt-simple">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Position</th>
+                      <th>Class</th>
+                      <th>Phone</th>
+                      <th>Start date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="row align-items-center">
+                          <div class="col-auto pe-0">
+                            <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="wid-40 rounded">
+                          </div>
+                          <div class="col">
+                            <h6 class="mb-0">Tuvshin</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-primary">Zahiral</td>
+                      <td>Year-1, Year2</td>
+                      <td>99110509</td>
+                      <td>2025/08/25</td>
+                      <td>
+                        <span class="badge bg-light-success">Active</span>
+                        <div class="overlay-edit">
+                          <ul class="list-inline mb-0">
+                            <li class="list-inline-item m-0"><a href="javascript:void(0)" class="avtar avtar-s btn btn-primary edit-btn" data-id="1"><i class="ti ti-pencil f-18"></i></a></li>
+                            <li class="list-inline-item m-0"><a href="javascript:void(0)" class="avtar avtar-s btn bg-white btn-link-danger delete-btn" data-id="1"><i class="ti ti-trash f-18"></i></a></li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="calendar-modal-title f-w-600 text-truncate" id="editModalLabel">Edit Teacher</h3>
+          <a href="#" class="avtar avtar-s btn-link-danger btn-pc-default" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close">
+            <i class="ti ti-x f-20"></i>
+          </a>
+        </div>
+        <div class="modal-body">
+          <form id="editForm" method="POST" action="edit-teacher.php">
+            <input type="hidden" name="id" id="editId">
+            <div class="form-group">
+              <label for="editName">Name:</label>
+              <input type="text" class="form-control" name="name" id="editName" required>
+            </div>
+            <div class="form-group">
+              <label for="editPosition">Position:</label>
+              <input type="text" class="form-control" name="position" id="editPosition" required>
+            </div>
+            <div class="form-group">
+              <label for="editClass">Class:</label>
+              <input type="text" class="form-control" name="class" id="editClass" required>
+            </div>
+            <div class="form-group">
+              <label for="editPhone">Phone:</label>
+              <input type="text" class="form-control" name="phone" id="editPhone" required>
+            </div>
+            <div class="form-group">
+              <label for="editStartDate">Start date:</label>
+              <input type="date" class="form-control" name="start_date" id="editStartDate" required>
+            </div>
+            <div class="form-group">
+              <label for="editStatus">Status:</label>
+              <select class="form-control" name="status" id="editStatus">
+                <option value="Active">Active</option>
+                <option value="Disabled">Disabled</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <ul class="list-inline me-auto mb-0">
+            <li class="list-inline-item align-bottom">
+              <a href="#" id="pc_event_remove" class="avtar avtar-s btn-link-danger btn-pc-default w-sm-auto" data-bs-toggle="tooltip"
+                title="Delete">
+                <i class="ti ti-trash f-18"></i>
+              </a>
+            </li>
+            <li class="list-inline-item align-bottom">
+              <a href="#" id="pc_event_edit" class="avtar avtar-s btn-link-success btn-pc-default" data-bs-toggle="tooltip"
+                title="Edit">
+                <i class="ti ti-edit-circle f-18"></i>
+              </a>
+            </li>
+          </ul>
+          <div class="flex-grow-1 text-end">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @@include('../layouts/footer-block.html') @@include('../layouts/footer-js.html')
+  <script src="../assets/js/plugins/simple-datatables.js"></script>
+  <script>
+    const dataTable = new simpleDatatables.DataTable('#pc-dt-simple', {
+      sortable: false,
+      perPage: 5
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+      const editButtons = document.querySelectorAll('.edit-btn');
+
+      editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const row = this.closest('tr');
+          const id = this.getAttribute('data-id');
+          const name = row.querySelector('td:nth-child(1) .col h6').innerText;
+          const position = row.querySelector('td:nth-child(2)').innerText;
+          const classValue = row.querySelector('td:nth-child(3)').innerText;
+          const phone = row.querySelector('td:nth-child(4)').innerText;
+          const startDate = row.querySelector('td:nth-child(5)').innerText;
+          const status = row.querySelector('td:nth-child(6) .badge').innerText.trim();
+
+          document.getElementById('editId').value = id;
+          document.getElementById('editName').value = name;
+          document.getElementById('editPosition').value = position;
+          document.getElementById('editClass').value = classValue;
+          document.getElementById('editPhone').value = phone;
+          document.getElementById('editStartDate').value = startDate.split('/').reverse().join('-'); // Convert to yyyy-mm-dd format
+          document.getElementById('editStatus').value = status === 'Active' ? 'Active' : 'Disabled';
+
+          const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+          editModal.show();
+        });
+      });
+    });
+  </script>
+  <script src="../assets/js/plugins/sweetalert2.all.min.js"></script>
+  @@include('../layouts/customizer.html')
+</body>
+</html>

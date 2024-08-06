@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  @@include('../layouts/head-page-meta.html', {'title': 'Monthly grade'}) @@include('../layouts/head-css.html')
+</head>
+<body @@bodySetup>
+  @@include('../layouts/layout-vertical.html')
+    <div class="pc-container">
+        <div class="pc-content">
+        @@include('../layouts/breadcrumb.html', {'breadcrumb-item': 'Other', 'breadcrumb-item-active': 'Monthly grade'})
+        <div class="row">
+            <div class="col-sm-12">
+                
+            <div class="card" id="class-selection-card">
+                <div class="card-header">
+                  <h5>Sariin unelgee</h5>
+                  <small>Angia songood dungee oruulaarai</small>
+                </div>
+                <div class="card-body">
+                  <form id="class-selection-form">
+                    <div class="mb-3 row">
+                      <label class="col-form-label col-lg-4 col-sm-12 text-lg-end" for="class-select">Class: </label>
+                      <div class="col-lg-6 col-md-11 col-sm-12">
+                        <div class="form-group">
+                            <select id="class-select" name="class" class="form-control" required>
+                                <option value="">Select a class</option>
+                                <option value="Class 1">Year - 1</option>
+                                <option value="Class 2">Year - 2</option>
+                            </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-0">
+                      <label class="col-form-label col-lg-4 col-sm-12 text-lg-end"></label>
+                      <div class="col-lg-6 col-md-11 col-sm-12">
+                        <button type="submit" class="btn btn-primary">Select Class</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+                <div class="card" id="grades-card" style="display:none;">
+                    <div class="card-header">
+                        <h5>Enter Grades</h5>
+                    </div>
+                    <div class="card-body dt-responsive">
+                        <table id="grades-table" class="table table-striped table-bordered nowrap display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Student Name</th>
+                                    <th>Attendance (10%)</th>
+                                    <th>Active (20%)</th>
+                                    <th>Homework (30%)</th>
+                                    <th>Test (40%)</th>
+                                    <th>Feedback</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rows will be populated dynamically -->
+                            </tbody>
+                        </table>
+                        <button id="submit-grades" class="btn btn-primary">Submit Grades</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  @@include('../layouts/footer-block.html') @@include('../layouts/footer-js.html')
+  @@include('../layouts/customizer.html')
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    let courseData = {
+        'Class 1': [
+            { name: 'John Doe', attendance: 0, active: 0, homework: 0, test: 0, feedback: '' },
+            { name: 'Jane Smith', attendance: 0, active: 0, homework: 0, test: 0, feedback: '' }
+        ],
+        'Class 2': [
+            { name: 'Alice Brown', attendance: 0, active: 0, homework: 0, test: 0, feedback: '' },
+            { name: 'Bob Johnson', attendance: 0, active: 0, homework: 0, test: 0, feedback: '' }
+        ]
+    };
+
+    // Handle class selection form submission
+    document.getElementById('class-selection-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const selectedClass = document.getElementById('class-select').value;
+        if (selectedClass) {
+            populateGradesTable(selectedClass);
+            document.getElementById('grades-card').style.display = 'block';
+        }
+    });
+
+    function populateGradesTable(selectedClass) {
+        const students = courseData[selectedClass];
+        const tableBody = document.querySelector('#grades-table tbody');
+        tableBody.innerHTML = '';
+        students.forEach((student, index) => {
+            const row = document.createElement('tr');
+
+            // Create cells for each column
+            const cellIndex = document.createElement('td');
+            cellIndex.textContent = index + 1;
+            row.appendChild(cellIndex);
+
+            const cellName = document.createElement('td');
+            cellName.textContent = student.name;
+            row.appendChild(cellName);
+
+            const cellAttendance = createInputCell(student.attendance);
+            row.appendChild(cellAttendance);
+
+            const cellActive = createInputCell(student.active);
+            row.appendChild(cellActive);
+
+            const cellHomework = createInputCell(student.homework);
+            row.appendChild(cellHomework);
+
+            const cellTest = createInputCell(student.test);
+            row.appendChild(cellTest);
+
+            const cellFeedback = createInputCell(student.feedback, true);
+            row.appendChild(cellFeedback);
+
+            tableBody.appendChild(row);
+        });
+
+        if ($.fn.dataTable.isDataTable('#grades-table')) {
+            $('#grades-table').DataTable().destroy();
+        }
+
+        $('#grades-table').DataTable();
+    }
+
+    function createInputCell(value, isText = false) {
+        const cell = document.createElement('td');
+        const input = document.createElement('input');
+        input.type = isText ? 'text' : 'number';
+        input.value = value;
+        input.className = 'form-control';
+        cell.appendChild(input);
+        return cell;
+    }
+
+    document.getElementById('submit-grades').addEventListener('click', function() {
+        const tableBody = document.querySelector('#grades-table tbody');
+        const rows = tableBody.querySelectorAll('tr');
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            const studentName = cells[1].textContent;
+            const studentData = courseData[selectedClass].find(student => student.name === studentName);
+
+            if (studentData) {
+                studentData.attendance = parseFloat(cells[2].querySelector('input').value);
+                studentData.active = parseFloat(cells[3].querySelector('input').value);
+                studentData.homework = parseFloat(cells[4].querySelector('input').value);
+                studentData.test = parseFloat(cells[5].querySelector('input').value);
+                studentData.feedback = cells[6].querySelector('input').value;
+            }
+        });
+
+        alert('Grades submitted successfully!');
+    });
+});
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../../assets/js/plugins/dataTables.min.js"></script>
+<script src="../../assets/js/plugins/dataTables.bootstrap5.min.js"></script>
+<script src="../../assets/js/plugins/choices.min.js"></script>
+</html>
