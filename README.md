@@ -2,4 +2,4 @@
 Bootstrap version of light-able
 
 ## Step1 npm install
-## Step2 nmp run or gulp
+## Step2 npm run or gulp
