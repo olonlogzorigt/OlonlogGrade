@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Student Add | Olonlog-IB</title>
+  <!-- [Meta] -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="description"
+    content="olonlog-ib."
+  />
+  <meta name="author" content="Tuvshin" />
+
+  <!-- [Favicon] icon -->
+  <link rel="icon" href="../assets/images/favicon2.png" type="image/x-icon" />
+
+  <!-- [Google Font : Public Sans] icon -->
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- [Tabler Icons] https://tablericons.com -->
+  <link rel="stylesheet" href="../assets/fonts/tabler-icons.min.css" >
+  <!-- [Feather Icons] https://feathericons.com -->
+  <link rel="stylesheet" href="../assets/fonts/feather.css" >
+  <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+  <link rel="stylesheet" href="../assets/fonts/fontawesome.css" >
+  <!-- [Material Icons] https://fonts.google.com/icons -->
+  <link rel="stylesheet" href="../assets/fonts/material.css" >
+  <!-- [Template CSS Files] -->
+  <link rel="stylesheet" href="../assets/css/style.css" id="main-style-link" >
+  <link rel="stylesheet" href="../assets/css/style-preset.css" >
+
+</head>
+<body data-pc-preset="preset-1" data-pc-sidebar-theme="light" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme="light">
+  <div class="loader-bg">
+  <div class="loader-track">
+    <div class="loader-fill"></div>
+  </div>
+</div>
+ <!-- [ Sidebar Menu ] start -->
+<nav class="pc-sidebar">
+  <div class="navbar-wrapper">
+    <div class="m-header">
+      <a href="../index.html" class="b-brand text-primary">
+        <img src="../../assets/images/favicon2.png" alt="logo image" class="logo-lg" />
+        <span class="badge bg-brand-color-2 rounded-pill ms-2 theme-version">v1.0</span>
+      </a>
+    </div>
+    <div class="navbar-content">
+      <ul class="pc-navbar">
+        <li class="pc-item pc-caption">
+          <label>Menu</label>
+        </li>
+        <li class="pc-item pc-hasmenu">
+          <a href="../index.html" class="pc-link">
+            <span class="pc-micon">
+              <i class="ph-duotone ph-gauge"></i>
+            </span>
+            <span class="pc-mtext">Dashboard</span>
+          </a>
+        </li>
+        <li class="pc-item pc-hasmenu">
+          <a href="#!" class="pc-link">
+            <span class="pc-micon">
+              <i class="ph-duotone ph-graduation-cap"></i>
+            </span>
+            <span class="pc-mtext">Grades</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span
+          ></a>
+          <ul class="pc-submenu">
+            <li class="pc-item"><a class="pc-link" href="../pages/monthly.html">Monthly</a></li>
+            <li class="pc-item"><a class="pc-link" href="../pages/term.html">Term</a></li>
+          </ul>
+        </li>
+        <li class="pc-item pc-hasmenu">
+          <a href="#!" class="pc-link">
+            <span class="pc-micon">
+              <i class="ph-duotone ph-projector-screen-chart"></i>
+            </span>
+            <span class="pc-mtext">Lesson</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span
+          ></a>
+          <ul class="pc-submenu">
+            <li class="pc-item"><a class="pc-link" href="../pages/courselist.html">lesson add</a></li>
+            <li class="pc-item"><a class="pc-link" href="../pages/lessonconfig.html">lesson config</a></li>
+          </ul>
+        </li>
+        <li class="pc-item pc-hasmenu">
+          <a href="#!" class="pc-link">
+            <span class="pc-micon">
+              <i class="ph-duotone ph-microsoft-teams-logo"></i>
+            </span>
+            <span class="pc-mtext">Class</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span
+          ></a>
+          <ul class="pc-submenu">
+            <li class="pc-item">'
+              <a class="pc-link" href="../pages/studentlist.html">
+                <span class="pc-micon">
+                  <i class="ph-duotone ph-users-four"></i>
+                </span>
+                <span class="pc-mtext">Student list</span>
+              </a>
+            </li>
+            <li class="pc-item">
+              <a class="pc-link" href="../pages/studentadd.html">
+                <span class="pc-micon">
+                  <i class="ph-duotone ph-user-plus"></i>
+                </span>
+                <span class="pc-mtext">Student add</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="pc-item pc-hasmenu">
+          <a href="#!" class="pc-link">
+            <span class="pc-micon">
+              <i class="ph-duotone ph-chalkboard-teacher"></i>
+            </span>
+            <span class="pc-mtext">Teacher</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span
+          ></a>
+          <ul class="pc-submenu">
+            <li class="pc-item"><a class="pc-link" href="../pages/userlist.html">Teacher list</a></li>
+            <li class="pc-item"><a class="pc-link" href="../pages/useradd.html">Teacher add</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+ <!-- [ Header Topbar ] start -->
+<header class="pc-header">
+  <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
+<div class="me-auto pc-mob-drp">
+  <ul class="list-unstyled">
+    <li class="pc-h-item pc-sidebar-collapse">
+      <a href="#" class="pc-head-link ms-0" id="sidebar-hide">
+        <i class="ti ti-menu-2"></i>
+      </a>
+    </li>
+    <li class="pc-h-item pc-sidebar-popup">
+      <a href="#" class="pc-head-link ms-0" id="mobile-collapse">
+        <i class="ti ti-menu-2"></i>
+      </a>
+    </li>
+    <li class="dropdown pc-h-item d-inline-flex d-md-none">
+      <a class="pc-head-link dropdown-toggle arrow-none m-0" data-bs-toggle="dropdown" href="#" role="button"
+        aria-haspopup="false" aria-expanded="false">
+        <i class="ph-duotone ph-magnifying-glass"></i>
+      </a>
+      <div class="dropdown-menu pc-h-dropdown drp-search">
+        <form class="px-3">
+          <div class="mb-0 d-flex align-items-center">
+            <input type="search" class="form-control border-0 shadow-none" placeholder="Search..." />
+            <button class="btn btn-light-secondary btn-search">Search</button>
+          </div>
+        </form>
+      </div>
+    </li>
+    <li class="pc-h-item d-none d-md-inline-flex">
+      <form class="form-search">
+        <i class="ph-duotone ph-magnifying-glass icon-search"></i>
+        <input type="search" class="form-control" placeholder="Search..." />
+        <button class="btn btn-search" style="padding: 0"><kbd>ctrl+k</kbd></button>
+      </form>
+    </li>
+  </ul>
+</div> </div>
+</header>
+
+
+  <div class="pc-container">
+    <div class="pc-content">
+      <div class="page-header">
+        <div class="page-block">
+          <div class="row align-items-center">
+            <div class="col-md-12">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="javascript: void(0)">Students</a></li>
+                <li class="breadcrumb-item" aria-current="page">Student Add</li>
+              </ul>
+            </div>
+            <div class="col-md-12">
+              <div class="page-header-title">
+                <h2 class="mb-0">Student Add</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">Basic Information</h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">First Name</label>
+                    <input type="text" class="form-control" placeholder="Enter first name">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Last Name</label>
+                    <input type="text" class="form-control" placeholder="Enter last name">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" placeholder="Enter email">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Mobile Number</label>
+                    <input type="number" class="form-control" placeholder="Enter Mobile number">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3 row">
+                        <label class="form-label">Main teacher</label>
+                          <input
+                            class="form-control"
+                            id="choices-teacher-remove-button"
+                            type="text"
+                            value="O.Dulguun, Densmaa"
+                            placeholder="Choose class teacher">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3 row">
+                        <label class="form-label">Class</label>
+                          <input
+                            class="form-control"
+                            id="choices-class-remove-button"
+                            type="text"
+                            value="Year-1, Year-2, Prep-A, Prep-B"
+                            placeholder="Enter something">
+                    </div>
+                </div>
+                <div class="col-md-12 text-end">
+                  <button class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/js/plugins/choices.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var textRemove = new Choices(document.getElementById('choices-class-remove-button'), {
+        delimiter: ',',
+        editItems: true,
+        maxItemCount: 3,
+        removeItemButton: true
+      });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+      var textRemove = new Choices(document.getElementById('choices-teacher-remove-button'), {
+        delimiter: ',',
+        editItems: true,
+        maxItemCount: 3,
+        removeItemButton: true
+      });
+    });
+  </script>
+  <footer class="pc-footer">
+    <div class="footer-wrapper container-fluid">
+      <div class="row">
+        <div class="col my-1">
+          <p class="m-0">Made with ♥ Computer Science Team <a href="https://themeforest.net/user/phoenixcoded" target="_blank"> Tuvhsin Teacher</a></p>
+        </div>
+        <div class="col-auto my-1">
+          <ul class="list-inline footer-link mb-0">
+            <li class="list-inline-item"><a href="../index.html">Home</a></li>
+            <li class="list-inline-item"><a href="#" target="_blank">School information</a></li>
+            <li class="list-inline-item"><a href="#" target="_blank">Support</a></li>
+          </ul>
+        </div>
+    </div>
+  </footer>
+ <!-- Required Js -->
+<script src="../assets/js/plugins/popper.min.js"></script>
+<script src="../assets/js/plugins/simplebar.min.js"></script>
+<script src="../assets/js/plugins/bootstrap.min.js"></script>
+<script src="../assets/js/fonts/custom-font.js"></script>
+<script src="../assets/js/pcoded.js"></script>
+<script src="../assets/js/plugins/feather.min.js"></script>
+
+
+
+
+
+<script>layout_change('light');</script>
+
+
+
+
+<script>layout_sidebar_change('light');</script>
+
+
+
+<script>change_box_container('false');</script>
+
+
+<script>layout_caption_change('true');</script>
+
+
+
+
+<script>layout_rtl_change('false');</script>
+
+
+<script>preset_change("preset-1");</script>
+
+   
+</body>
+</html>
