@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  @@include('../layouts/head-page-meta.html', {'title': 'Lesson Config'})
+  @@include('../layouts/head-css.html')
+</head>
+<body @@bodySetup>
+  @@include('../layouts/layout-vertical.html')
+  <div class="pc-container">
+    <div class="pc-content">
+      @@include('../layouts/breadcrumb.html', {'breadcrumb-item': 'Lessons', 'breadcrumb-item-active': 'Lesson Config'})
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="classSelect">Select Class:</label>
+                    <select id="classSelect" class="form-control">
+                        <option value="">Choose a class</option>
+                        <option value="class1">Class 1</option>
+                        <option value="class2">Class 2</option>
+                        <!-- Add more classes as needed -->
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <div id="studentsContainer" class="row"></div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <button id="confirmButton" class="btn btn-primary">Confirm Selections</button>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <div id="output" class="alert alert-info" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script src="../assets/js/plugins/choices.min.js"></script>
+  <script>
+    const data = {
+            class1: {
+                students: ['Tuvshin', 'Khishignemekh']
+            },
+            class2: {
+                students: ['Azjargal', 'Henchbish']
+            }
+        };
+
+        const lessons = [
+            'Lesson 1', 'Lesson 2', 'Lesson 3', 'Lesson 4', 'Lesson 5',
+            'Lesson 6', 'Lesson 7', 'Lesson 8', 'Lesson 9', 'Lesson 10',
+            'Lesson 11', 'Lesson 12', 'Lesson 13', 'Lesson 14', 'Lesson 15',
+            'Lesson 16', 'Lesson 17'
+        ];
+
+        document.getElementById('classSelect').addEventListener('change', function() {
+            const selectedClass = this.value;
+            const studentsContainer = document.getElementById('studentsContainer');
+            
+            // Clear previous content
+            studentsContainer.innerHTML = '';
+
+            if (selectedClass && data[selectedClass]) {
+                data[selectedClass].students.forEach(student => {
+                    const studentCard = document.createElement('div');
+                    studentCard.className = 'card mb-3 col-md-12';
+                    studentCard.innerHTML = `
+                        <div class="card-header">
+                            <h5>${student}</h5>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                ${lessons.map((lesson, index) => `
+                                    <div class="form-check form-check-inline">
+                                        <input type="checkbox" class="form-check-input input-primary" id="${student}_lesson${index + 1}">
+                                        <label class="form-check-label" for="${student}_lesson${index + 1}">${lesson}</label>
+                                    </div>
+                                `).join('')}
+                            </form>
+                        </div>
+                    `;
+                    studentsContainer.appendChild(studentCard);
+                });
+            }
+        });
+
+        document.getElementById('confirmButton').addEventListener('click', function() {
+            const selectedClass = document.getElementById('classSelect').value;
+            const output = document.querySelector('#output .alert');
+            let outputContent = '';
+
+            if (selectedClass) {
+                data[selectedClass].students.forEach(student => {
+                    const selectedLessons = [];
+                    lessons.forEach((lesson, index) => {
+                        const checkbox = document.getElementById(`${student}_lesson${index + 1}`);
+                        if (checkbox.checked) {
+                            selectedLessons.push(lesson);
+                        }
+                    });
+                    outputContent += `<strong>${student}:</strong> ${selectedLessons.join(', ')}<br>`;
+                });
+
+                output.style.display = 'block';
+                output.innerHTML = outputContent;
+            } else {
+                output.style.display = 'none';
+            }
+        });
+
+  </script>
+
+  @@include('../layouts/footer-block.html') @@include('../layouts/footer-js.html')
+   
+</body>
+</html>

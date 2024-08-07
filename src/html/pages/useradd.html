@@ -20,55 +20,66 @@
                 <div class="col-md-6">
                   <div class="mb-3">
                     <label class="form-label">First Name</label>
-                    <input type="text" class="form-control" placeholder="Enter first name">
+                    <input type="text" class="form-control" placeholder="Enter first name" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
                     <label class="form-label">Last Name</label>
-                    <input type="text" class="form-control" placeholder="Enter last name">
+                    <input type="text" class="form-control" placeholder="Enter last name" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control" placeholder="Enter email">
+                    <input type="email" class="form-control" placeholder="Enter email" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control" placeholder="Enter Password">
+                    <input type="password" class="form-control" placeholder="Enter Password" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
                     <label class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" placeholder="Enter confirm password">
+                    <input type="password" class="form-control" placeholder="Enter confirm password" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
                     <label class="form-label">Mobile Number</label>
-                    <input type="number" class="form-control" placeholder="Enter Mobile number">
+                    <input type="number" class="form-control" placeholder="Enter Mobile number" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
                     <label class="form-label">Profession</label>
-                    <input type="text" class="form-control" placeholder="Enter Profession">
+                    <input type="text" class="form-control" placeholder="Enter Profession" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3 row">
-                        <label class="form-label">Class</label>
+                        <label class="form-label" required>Class</label>
                           <input
                             class="form-control"
                             id="choices-text-remove-button"
                             type="text"
                             value="Year-1, Year-2, Prep-A, Prep-B"
-                            placeholder="Enter something">
+                            placeholder="Choices class">
                     </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Led of class</label>
+                    <input
+                            class="form-control"
+                            id="choices-class-remove-button"
+                            type="text"
+                            value="Year-1, Year-2, Prep-A, Prep-B"
+                            placeholder="Choices class">
+                  </div>
                 </div>
                 <div class="col-md-12 text-end">
                   <button class="btn btn-primary">Submit</button>
@@ -84,6 +95,14 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var textRemove = new Choices(document.getElementById('choices-text-remove-button'), {
+        delimiter: ',',
+        editItems: true,
+        maxItemCount: 3,
+        removeItemButton: true
+      });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+      var textRemove = new Choices(document.getElementById('choices-class-remove-button'), {
         delimiter: ',',
         editItems: true,
         maxItemCount: 3,
